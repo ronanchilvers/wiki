@@ -1,4 +1,5 @@
 <?php
+// Add routes
 
 use App\Handler\HomeHandler;
 use Psr\Http\Message\ResponseInterface as Response;

@@ -20,9 +20,11 @@ class HomeHandler implements HandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $name = $request->getAttribute('name', 'world');
-        $response = new Response();
-        $response->getBody()->write("Hello $name");
 
-        return $response;
+        return $this->render(
+            new Response(),
+            'home.twig',
+            ['name' => $name]
+        );
     }
 }

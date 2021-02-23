@@ -1,16 +1,30 @@
 <?php
 
+use DI\Bridge\Slim\Bridge;
 use Slim\Factory\AppFactory;
+use Slim\Handlers\Strategies\RequestHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// Instantiate App
-$app = AppFactory::create();
+$settings = require(__DIR__ . '/../config/settings.php');
 
-// Add error middleware
+$builder = new \DI\ContainerBuilder();
+$builder->addDefinitions(include(__DIR__ . '/../config/services.php'));
+$builder->addDefinitions([
+    'settings' => $settings,
+]);
+$builder->enableCompilation(__DIR__ . '/../var/container');
+$builder->useAutowiring(true);
+$builder->useAnnotations(false);
+
+AppFactory::setContainer($builder->build());
+$app = AppFactory::create();
+// $app->getRouteCollector()->setDefaultInvocationStrategy(new RequestHandler(true));
+
+// $app->addRoutingMiddleware();
+// $app->addBodyParsingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 
-// Add routes
 include(__DIR__ . '/../config/routes.php');
 
 $app->run();
