@@ -1,0 +1,25 @@
+{% extends 'layouts/page.twig' %}
+
+{% block body %}
+<form method="post" action="{{ action }}">
+    <div class="field">
+        <label class="label" for="title">Page Key</label>
+        <div class="control">
+            <input class="input" type="text" id="title" name="title" value="{{ title }}">
+        </div>
+        <p class="help">Only letters, numbers and underscores please!</p>
+    </div>
+    <div class="field">
+        <label class="label" for="content">Content</label>
+        <div class="control">
+            <textarea class="textarea" id="content" name="content" rows="15">{{ content|raw }}</textarea>
+        </div>
+    </div>
+    <div class="field is-grouped is-grouped-right">
+        <div class="control">
+            <a class="button is-light" href="{{ view_link(current_url()) }}">Cancel</a>
+            <button class="button is-primary">Save</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -4,6 +4,9 @@
 use Monolog\Logger;
 
 return [
+    'wiki' => [
+        'name' => 'wiki',
+    ],
     'env' => 'development',
     'displayErrorDetails' => true,
     'logger' => [
@@ -11,4 +14,7 @@ return [
         'path' => 'php://stderr',
         'level' => Logger::DEBUG,
     ],
+    'data' => [
+        'path' => __DIR__ . '/../data',
+    ]
 ];

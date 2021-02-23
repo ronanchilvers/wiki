@@ -1,0 +1,9 @@
+/** App Styles **/
+
+.content a {
+    text-decoration: underline;
+    color: blue;
+}
+a.button {
+    text-decoration: none;
+}

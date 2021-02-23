@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Wiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/fontawesome.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"> #}
+    <link rel="stylesheet" type="text/css" href="/css/fontawesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+</head>
+<body>
+
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ url_for('view') }}">
+            <strong>{% block wiki_name %}{{ settings.wiki.name }}{% endblock %}</strong>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="main-menu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="main-menu" class="navbar-menu">
+            {#<div class="navbar-start">
+            {% if not is_creating(current_url()) %}
+                <a class="navbar-item" href="{{ new_link(current_url()) }}">Create Page</a>
+            {% endif %}
+            </div>#}
+            <div class="navbar-end">
+            {% if not is_creating(current_url()) %}
+                <a class="navbar-item" href="{{ new_link(current_url()) }}">Create Page</a>
+            {% endif %}
+            {% if not is_editing(current_url()) and not is_creating(current_url()) %}
+                <a class="navbar-item" href="{{ edit_link(current_url()) }}">Edit Page</a>
+            {% elseif not is_creating(current_url()) %}
+                <a class="navbar-item" href="{{ view_link(current_url()) }}">View Page</a>
+            {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container is-fluid">
+        {% if flash %}
+            <div class="notification is-{{ flash.type }} is-light1">{{ flash.message }}</div>
+        {% endif %}
+            <div class="content">
+    {% block body %}{% endblock %}
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
